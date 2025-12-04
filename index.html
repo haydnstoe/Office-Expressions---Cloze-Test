@@ -312,18 +312,52 @@
   </footer>
 
   <script>
-    (function () {
+   <script>
+  (function () {
+    // Fisher-Yates shuffle for an array
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Randomise the order of .option elements inside each .options container
+    function randomiseOptionsOrder() {
+      const optionsContainers = document.querySelectorAll('.options');
+      optionsContainers.forEach(container => {
+        // Convert NodeList to array
+        const optionNodes = Array.from(container.querySelectorAll('.option'));
+        // Shuffle the array
+        const shuffled = shuffleArray(optionNodes.slice());
+        // Remove existing nodes from DOM and re-append in shuffled order
+        shuffled.forEach(node => container.appendChild(node));
+      });
+    }
+
+    // Attach click and keyboard handlers to options (idempotent)
+    function attachOptionHandlers() {
       const optionElements = document.querySelectorAll('.option');
 
       optionElements.forEach(opt => {
+        // Ensure each option is focusable for keyboard users
         opt.setAttribute('tabindex', '0');
 
+        // Remove any previously attached handlers to avoid duplicates
+        opt.replaceWith(opt.cloneNode(true));
+      });
+
+      // Re-query after cloning to get fresh elements without duplicate listeners
+      const freshOptions = document.querySelectorAll('.option');
+
+      freshOptions.forEach(opt => {
         opt.addEventListener('click', function () {
           const isCorrect = this.getAttribute('data-correct') === 'true';
           const parent = this.parentElement;
           const siblings = parent.querySelectorAll('.option');
 
-          // Reset siblings
+          // Reset siblings' classes and inline colours
           siblings.forEach(sib => {
             sib.classList.remove('correct', 'incorrect');
             sib.style.color = '';
@@ -338,7 +372,7 @@
           }
         });
 
-        // Keyboard support
+        // Keyboard support (Enter / Space)
         opt.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -346,7 +380,22 @@
           }
         });
       });
-    })();
+    }
+
+    // Initialise: randomise options, then attach handlers
+    function initQuiz() {
+      randomiseOptionsOrder();
+      attachOptionHandlers();
+    }
+
+    // Run initialisation once DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initQuiz);
+    } else {
+      initQuiz();
+    }
+  })();
+</script>
   </script>
 </body>
 </html>
