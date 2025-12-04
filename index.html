@@ -1,401 +1,422 @@
 <!doctype html>
 <html lang="en-GB">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Office Expressions</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title></title>
   <style>
     :root{
-      --green:#0a7f2a;
-      --red:#c92a2a;
-      --border:#e1e4e8;
-      --bg:#f7f7f9;
-      --card:#ffffff;
-      --muted:#555;
+      --bg: #f7f7f9;
+      --card: #ffffff;
+      --muted: #555;
+      --border: #e1e4e8;
+      --green: #0a7f2a;
+      --red: #c92a2a;
     }
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.5;
-      margin: 24px;
-      color: #111;
-      background: var(--bg);
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    header { margin-bottom: 18px; }
-    h1 { font-size: 1.6rem; margin: 0 0 6px 0; }
-    p.lead { margin: 0 0 18px 0; color: #333; }
-    section { background: var(--card); border: 1px solid var(--border); padding: 18px; margin-bottom: 18px; border-radius: 6px; }
-    ol.sentences { margin: 0 0 0 20px; padding: 0; }
-    ol.sentences li { margin: 10px 0; }
-    .cloze { margin-top: 12px; }
-    .question { margin: 14px 0; padding: 12px; border: 1px dashed #ddd; border-radius: 6px; background: #fcfcfd; }
-    .sentence { margin-bottom: 10px; }
-    .options { display: flex; flex-direction: column; gap: 8px; }
-    .option {
-      padding: 8px 10px;
-      border-radius: 4px;
-      border: 1px solid #d0d7de;
-      background: #fff;
-      cursor: pointer;
-      user-select: none;
+    .wrap{
+      max-width:980px;
+      margin:28px auto;
+      padding:18px;
     }
-    .option:hover { background: #f0f4f8; }
-    .option.correct { color: var(--green); border-color: var(--green); background: #eef9ef; }
-    .option.incorrect { color: var(--red); border-color: var(--red); background: #fff5f5; }
-    .meta { margin-top: 8px; font-size: 0.9rem; color: var(--muted); }
-    footer { margin-top: 18px; font-size: 0.9rem; color: #666; }
-    @media (min-width: 720px) {
-      .options { flex-direction: row; flex-wrap: wrap; }
-      .option { flex: 1 1 calc(50% - 12px); }
+    header{margin-bottom:18px}
+    h1{font-size:1.5rem;margin:0 0 6px 0}
+    p.lead{margin:0 0 12px 0;color:var(--muted)}
+    section.card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:8px;
+      padding:16px;
+      margin-bottom:16px;
+    }
+    ol.sentences{margin:0 0 0 20px;padding:0}
+    ol.sentences li{margin:8px 0}
+    .quiz{margin-top:12px}
+    .question{
+      border:1px dashed #e6e9ec;
+      background:#fcfcfd;
+      padding:12px;
+      border-radius:6px;
+      margin-bottom:12px;
+    }
+    .sentence{margin-bottom:10px}
+    .blank{font-weight:600;color:#0b3b66}
+    .options{display:flex;flex-direction:column;gap:8px}
+    .option{
+      padding:8px 10px;
+      border-radius:6px;
+      border:1px solid #d7dde3;
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
+      transition:background .12s, border-color .12s, color .12s;
+    }
+    .option:hover{background:#f3f7fb}
+    .option.correct{ color: var(--green); border-color: var(--green); background:#eef9ef; }
+    .option.incorrect{ color: var(--red); border-color: var(--red); background:#fff5f5; }
+    .meta{font-size:0.9rem;color:var(--muted);margin-top:8px}
+    footer{font-size:0.9rem;color:var(--muted);margin-top:12px}
+    @media(min-width:720px){
+      .options{flex-direction:row;flex-wrap:wrap}
+      .option{flex:1 1 calc(50% - 12px)}
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Office Expressions</h1>
-    <p class="lead">Below are 20 full sentences using expressions common in British office and legal settings.</p>
-  </header>
+  <div class="wrap">
+    <header>
+      <h1></h1>
+      <p class="lead">For each sentence choose the correct meaning.</p>
+    </header>
 
-  <section aria-labelledby="list-heading">
-    <h2 id="list-heading"></h2>
-    <ol class="sentences">
-      <li>I'm just popping off to make some tea; would you like anything from the kitchen?</li>
-      <li>Could you please phone later, or leave your name and email address, and we will make sure to contact you as soon as the lawyer is back in the office?</li>
-      <li>I'll send you an email with the documents after lunch.</li>
-      <li>I'll give you a bell this afternoon to go over the details.</li>
-      <li>I'm tied up in meetings all morning, but I can see you after one o'clock.</li>
-      <li>I'll nip out for a sandwich and be back by two.</li>
-      <li>Please put the file on my desk when you have a moment.</li>
-      <li>We need to carry out a due diligence before advising the client on the acquisition.</li>
-      <li>The correspondence was marked without prejudice to allow frank settlement talks.</li>
-      <li>The firm agreed to take the matter on pro bono for the local charity.</li>
-      <li>Please ensure client confidentiality is maintained at all times when handling those papers.</li>
-      <li>Could you draft a letter of intent to record the parties' preliminary agreement?</li>
-      <li>I'll pop the contract in the post this afternoon so it reaches the court tomorrow.</li>
-      <li>Let's have a quick word in the corridor about the timetable.</li>
-      <li>I'll be out of the office on Friday but available by email if the matter is urgent.</li>
-      <li>Can you chase that up the supplier and let me know the outcome?</li>
-      <li>We'll put the proposal on the agenda for the next board meeting.</li>
-      <li>By close of business, please submit your weekly timesheets.</li>
-      <li>There are three action points from today's meeting that the team must complete.</li>
-      <li>I'll follow up with the client first thing tomorrow to confirm the arrangements.</li>
-    </ol>
-  </section>
+    <section class="card" aria-labelledby="sentences-heading">
+      <h2 id="sentences-heading">Source Sentences</h2>
+      <ol class="sentences">
+        <li>I'm just popping off to make some tea; would you like anything from the kitchen?</li>
+        <li>Could you please phone later, or leave your name and email address, and we will make sure to contact you as soon as the lawyer is back in the office?</li>
+        <li>I'll send you an email with the documents after lunch.</li>
+        <li>I'll give you a bell this afternoon to go over the details.</li>
+        <li>I'm tied up in meetings all morning, but I can see you after one o'clock.</li>
+        <li>I'll nip out for a sandwich and be back by two.</li>
+        <li>Please put the file on my desk when you have a moment.</li>
+        <li>We need to carry out due diligence before advising the client on the acquisition.</li>
+        <li>The correspondence was marked without prejudice to allow frank settlement talks.</li>
+        <li>The firm agreed to take the matter on pro bono for the local charity.</li>
+        <li>Please ensure client confidentiality is maintained at all times when handling those papers.</li>
+        <li>Could you draft a letter of intent to record the parties' preliminary agreement?</li>
+        <li>I'll pop the contract in the post this afternoon so it reaches the court tomorrow.</li>
+        <li>Let's have a quick word in the corridor about the timetable.</li>
+        <li>I'll be out of the office on Friday but available by email if the matter is urgent.</li>
+        <li>Can you chase that up with the supplier and let me know the outcome?</li>
+        <li>We'll put the proposal on the agenda for the next board meeting.</li>
+        <li>By close of business, please submit your weekly timesheets.</li>
+        <li>There are three action points from today's meeting that the team must complete.</li>
+        <li>I'll follow up with the client first thing tomorrow to confirm the arrangements.</li>
+      </ol>
+    </section>
 
-  <section class="cloze" aria-labelledby="cloze-heading">
-    <h2 id="cloze-heading">Cloze Tests & Multiple Choice</h2>
+    <section class="card quiz" aria-labelledby="quiz-heading">
+      <h2 id="quiz-heading"></h2>
 
-    <!-- 1 -->
-    <div class="question" id="q1">
-      <div class="sentence"><strong>1.</strong> I'm just _______ to make some tea; would you like anything from the kitchen?</div>
-      <div class="options" role="list">
-        <div class="option" role="listitem" data-correct="true">popping off</div>
-        <div class="option" role="listitem" data-correct="false">billing hours</div>
-        <div class="option" role="listitem" data-correct="false">tabling it</div>
-        <div class="option" role="listitem" data-correct="false">taking a sick day</div>
+      <!-- Q1 -->
+      <div class="question" id="q1">
+        <div class="sentence"><strong>1.</strong> I'm just <span class="blank">______</span> to make some tea; would you like anything from the kitchen?</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">popping off — going briefly to make tea</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">moving permanently to another office</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">sending a parcel by post</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">taking an extended break</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 2 -->
-    <div class="question" id="q2">
-      <div class="sentence"><strong>2.</strong> Could you please phone later, or leave your name and email address, and we will make sure to contact you as soon as the _______ is back in the office?</div>
-      <div class="options">
-        <div class="option" data-correct="true">lawyer</div>
-        <div class="option" data-correct="false">intern</div>
-        <div class="option" data-correct="false">receptionist</div>
-        <div class="option" data-correct="false">postman</div>
+      <!-- Q2 -->
+      <div class="question" id="q2">
+        <div class="sentence"><strong>2.</strong> Could you please phone later, or leave your name and email address, and we will make sure to contact you as soon as the <span class="blank">______</span> is back in the office?</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">lawyer — the legal professional who will respond</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">postman — the person who delivers mail</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">caretaker — the building maintenance worker</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">auditor — the external reviewer</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 3 -->
-    <div class="question" id="q3">
-      <div class="sentence"><strong>3.</strong> I'll _______ an email with the documents after lunch.</div>
-      <div class="options">
-        <div class="option" data-correct="true">send you</div>
-        <div class="option" data-correct="false">bill you</div>
-        <div class="option" data-correct="false">table you</div>
-        <div class="option" data-correct="false">sign off</div>
+      <!-- Q3 -->
+      <div class="question" id="q3">
+        <div class="sentence"><strong>3.</strong> I'll <span class="blank">______</span> you an email with the documents after lunch.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">send — email the documents</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">post — send by postal service only</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">call — telephone instead of emailing</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">file — store the documents in a cabinet</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 4 -->
-    <div class="question" id="q4">
-      <div class="sentence"><strong>4.</strong> I'll give you a _______ this afternoon to go over the details.</div>
-      <div class="options">
-        <div class="option" data-correct="true">bell</div>
-        <div class="option" data-correct="false">bill</div>
-        <div class="option" data-correct="false">brief</div>
-        <div class="option" data-correct="false">bench</div>
+      <!-- Q4 -->
+      <div class="question" id="q4">
+        <div class="sentence"><strong>4.</strong> I'll give you a <span class="blank">______</span> this afternoon to go over the details.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">bell — a quick phone call</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">stamp — a postal stamp</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">brief — a written summary</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">bench — a judge or seat</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 5 -->
-    <div class="question" id="q5">
-      <div class="sentence"><strong>5.</strong> I'm _______ in meetings all morning, but I can see you after one o'clock.</div>
-      <div class="options">
-        <div class="option" data-correct="true">tied up</div>
-        <div class="option" data-correct="false">popped out</div>
-        <div class="option" data-correct="false">signed off</div>
-        <div class="option" data-correct="false">pro bono</div>
+      <!-- Q5 -->
+      <div class="question" id="q5">
+        <div class="sentence"><strong>5.</strong> I'm <span class="blank">______</span> in meetings all morning, but I can see you after one o'clock.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">tied up — busy and unavailable</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">tied down — permanently employed</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">tied off — finished work</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">tied in — on holiday</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 6 -->
-    <div class="question" id="q6">
-      <div class="sentence"><strong>6.</strong> I'll _______ out for a sandwich and be back by two.</div>
-      <div class="options">
-        <div class="option" data-correct="true">nip</div>
-        <div class="option" data-correct="false">table</div>
-        <div class="option" data-correct="false">bill</div>
-        <div class="option" data-correct="false">follow</div>
+      <!-- Q6 -->
+      <div class="question" id="q6">
+        <div class="sentence"><strong>6.</strong> I'll <span class="blank">______</span> out for a sandwich and be back by two.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">nip — go out briefly</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">trip — go on holiday</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">post — send by mail</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">file — store documents</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 7 -->
-    <div class="question" id="q7">
-      <div class="sentence"><strong>7.</strong> Please put the file on my _______ when you have a moment.</div>
-      <div class="options">
-        <div class="option" data-correct="true">desk</div>
-        <div class="option" data-correct="false">shelf</div>
-        <div class="option" data-correct="false">post</div>
-        <div class="option" data-correct="false">bell</div>
+      <!-- Q7 -->
+      <div class="question" id="q7">
+        <div class="sentence"><strong>7.</strong> Please put the file on my <span class="blank">______</span> when you have a moment.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">desk — the surface where I work</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">shelf — a high storage shelf</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">tray — a serving tray</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">post — the mail system</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 8 (legal) -->
-    <div class="question" id="q8">
-      <div class="sentence"><strong>8.</strong> We need to carry out a _______ before advising the client on the acquisition.</div>
-      <div class="options">
-        <div class="option" data-correct="true">due diligence</div>
-        <div class="option" data-correct="false">heads up</div>
-        <div class="option" data-correct="false">pop off</div>
-        <div class="option" data-correct="false">nip out</div>
+      <!-- Q8 -->
+      <div class="question" id="q8">
+        <div class="sentence"><strong>8.</strong> We need to carry out <span class="blank">______</span> before advising the client on the acquisition.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">due diligence — careful checks and investigations</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">due date — the payment deadline</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">due process — court procedure</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">due course — at some point later</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 9 (legal) -->
-    <div class="question" id="q9">
-      <div class="sentence"><strong>9.</strong> The correspondence was marked _______ to allow frank settlement talks.</div>
-      <div class="options">
-        <div class="option" data-correct="true">without prejudice</div>
-        <div class="option" data-correct="false">in the loop</div>
-        <div class="option" data-correct="false">on the same page</div>
-        <div class="option" data-correct="false">by close of play</div>
+      <!-- Q9 -->
+      <div class="question" id="q9">
+        <div class="sentence"><strong>9.</strong> The correspondence was marked <span class="blank">______</span> to allow frank settlement talks.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">without prejudice — not to be used as an admission in court</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">with prejudice — intended to harm reputation</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">confidential — for internal eyes only</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">urgent — needs immediate attention</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 10 (legal) -->
-    <div class="question" id="q10">
-      <div class="sentence"><strong>10.</strong> The firm agreed to take the matter on _______ for the local charity.</div>
-      <div class="options">
-        <div class="option" data-correct="true">pro bono</div>
-        <div class="option" data-correct="false">table it</div>
-        <div class="option" data-correct="false">pop in</div>
-        <div class="option" data-correct="false">give a bell</div>
+      <!-- Q10 -->
+      <div class="question" id="q10">
+        <div class="sentence"><strong>10.</strong> The firm agreed to take the matter on <span class="blank">______</span> for the local charity.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">pro bono — free legal work for public good</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">on retainer — paid ongoing service</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">on account — billed later</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">on notice — with prior warning</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 11 (legal) -->
-    <div class="question" id="q11">
-      <div class="sentence"><strong>11.</strong> Please ensure _______ is maintained at all times when handling those papers.</div>
-      <div class="options">
-        <div class="option" data-correct="true">client confidentiality</div>
-        <div class="option" data-correct="false">action points</div>
-        <div class="option" data-correct="false">heads up</div>
-        <div class="option" data-correct="false">pop you</div>
+      <!-- Q11 -->
+      <div class="question" id="q11">
+        <div class="sentence"><strong>11.</strong> Please ensure <span class="blank">______</span> is maintained at all times when handling those papers.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">client confidentiality — keeping client information private</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">client courtesy — polite behaviour</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">client contact — phone details</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">client credit — billing status</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 12 (legal) -->
-    <div class="question" id="q12">
-      <div class="sentence"><strong>12.</strong> Could you draft a _______ to record the parties' preliminary agreement?</div>
-      <div class="options">
-        <div class="option" data-correct="true">letter of intent</div>
-        <div class="option" data-correct="false">action point</div>
-        <div class="option" data-correct="false">timesheet</div>
-        <div class="option" data-correct="false">bell</div>
+      <!-- Q12 -->
+      <div class="question" id="q12">
+        <div class="sentence"><strong>12.</strong> Could you draft a <span class="blank">______</span> to record the parties' preliminary agreement?</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">letter of intent — a document stating preliminary agreement</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">letter of demand — a request for payment</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">letter of thanks — a courtesy note</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">letter of credit — bank guarantee</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 13 -->
-    <div class="question" id="q13">
-      <div class="sentence"><strong>13.</strong> I'll pop the contract in the _______ this afternoon so it reaches the court tomorrow.</div>
-      <div class="options">
-        <div class="option" data-correct="true">post</div>
-        <div class="option" data-correct="false">desk</div>
-        <div class="option" data-correct="false">bin</div>
-        <div class="option" data-correct="false">loop</div>
+      <!-- Q13 -->
+      <div class="question" id="q13">
+        <div class="sentence"><strong>13.</strong> I'll pop the contract in the <span class="blank">______</span> this afternoon so it reaches the court tomorrow.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">post — send by postal service</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">bin — throw away</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">desk — leave on my desk</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">cloud — upload online</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 14 -->
-    <div class="question" id="q14">
-      <div class="sentence"><strong>14.</strong> Let's have a quick _______ in the corridor about the timetable.</div>
-      <div class="options">
-        <div class="option" data-correct="true">word</div>
-        <div class="option" data-correct="false">file</div>
-        <div class="option" data-correct="false">post</div>
-        <div class="option" data-correct="false">bell</div>
+      <!-- Q14 -->
+      <div class="question" id="q14">
+        <div class="sentence"><strong>14.</strong> Let's have a quick <span class="blank">______</span> in the corridor about the timetable.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">word — a short private conversation</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">file — a document folder</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">post — send by mail</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">bell — ring someone</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 15 -->
-    <div class="question" id="q15">
-      <div class="sentence"><strong>15.</strong> I'll be _______ of the office on Friday but available by email if urgent.</div>
-      <div class="options">
-        <div class="option" data-correct="true">out</div>
-        <div class="option" data-correct="false">tied up</div>
-        <div class="option" data-correct="false">popping</div>
-        <div class="option" data-correct="false">pro bono</div>
+      <!-- Q15 -->
+      <div class="question" id="q15">
+        <div class="sentence"><strong>15.</strong> I'll be <span class="blank">______</span> of the office on Friday but available by email if the matter is urgent.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">out — away from the office</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">in — present at the office</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">tied up — permanently employed</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">signed off — approved</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 16 -->
-    <div class="question" id="q16">
-      <div class="sentence"><strong>16.</strong> Can you _______ that up the supplier and let me know the outcome?</div>
-      <div class="options">
-        <div class="option" data-correct="true">chase</div>
-        <div class="option" data-correct="false">table</div>
-        <div class="option" data-correct="false">post</div>
-        <div class="option" data-correct="false">bell</div>
+      <!-- Q16 -->
+      <div class="question" id="q16">
+        <div class="sentence"><strong>16.</strong> Can you <span class="blank">______</span> that up with the supplier and let me know the outcome?</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">chase — follow up to get a response</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">chase away — dismiss someone</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">chase down — physically pursue</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">chase off — send away angrily</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 17 -->
-    <div class="question" id="q17">
-      <div class="sentence"><strong>17.</strong> We'll put the proposal on the _______ for the next board meeting.</div>
-      <div class="options">
-        <div class="option" data-correct="true">agenda</div>
-        <div class="option" data-correct="false">post</div>
-        <div class="option" data-correct="false">desk</div>
-        <div class="option" data-correct="false">bell</div>
+      <!-- Q17 -->
+      <div class="question" id="q17">
+        <div class="sentence"><strong>17.</strong> We'll put the proposal on the <span class="blank">______</span> for the next board meeting.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">agenda — the list of items to discuss</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">post — mail it out</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">desk — leave it on a desk</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">file — store it away</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 18 -->
-    <div class="question" id="q18">
-      <div class="sentence"><strong>18.</strong> By _______ of business, please submit your weekly timesheets.</div>
-      <div class="options">
-        <div class="option" data-correct="true">close</div>
-        <div class="option" data-correct="false">start</div>
-        <div class="option" data-correct="false">mid</div>
-        <div class="option" data-correct="false">post</div>
+      <!-- Q18 -->
+      <div class="question" id="q18">
+        <div class="sentence"><strong>18.</strong> By close of <span class="blank">______</span>, please submit your weekly timesheets.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">business — the end of the working day</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">play — a theatrical performance</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">week — the whole week</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">post — after mailing</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 19 -->
-    <div class="question" id="q19">
-      <div class="sentence"><strong>19.</strong> There are three _______ from today's meeting that the team must complete.</div>
-      <div class="options">
-        <div class="option" data-correct="true">action points</div>
-        <div class="option" data-correct="false">posts</div>
-        <div class="option" data-correct="false">bells</div>
-        <div class="option" data-correct="false">letters</div>
+      <!-- Q19 -->
+      <div class="question" id="q19">
+        <div class="sentence"><strong>19.</strong> There are three <span class="blank">______</span> from today's meeting that the team must complete.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">action points — specific tasks to be done</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">action films — movies</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">action stations — emergency positions</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">action plans — long-term strategies</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 20 -->
-    <div class="question" id="q20">
-      <div class="sentence"><strong>20.</strong> I'll _______ with the client first thing tomorrow to confirm the arrangements.</div>
-      <div class="options">
-        <div class="option" data-correct="true">follow up</div>
-        <div class="option" data-correct="false">pop off</div>
-        <div class="option" data-correct="false">table</div>
-        <div class="option" data-correct="false">post</div>
+      <!-- Q20 -->
+      <div class="question" id="q20">
+        <div class="sentence"><strong>20.</strong> I'll <span class="blank">______</span> with the client first thing tomorrow to confirm the arrangements.</div>
+        <div class="options" role="list">
+          <div class="option" data-correct="true" role="listitem" tabindex="0">follow up — contact again to confirm</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">follow in — physically follow someone</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">follow out — escort someone out</div>
+          <div class="option" data-correct="false" role="listitem" tabindex="0">follow on — continue a series</div>
+        </div>
       </div>
-    </div>
 
-    <div class="meta">Tip: click any answer to see whether it's correct. You can change your choice at any time.</div>
-  </section>
+      <div class="meta">Tip: click or press Enter/Space on an option. The choices are shuffled each time the page loads.</div>
+    </section>
 
-  <footer>
-    <div></div>
-  </footer>
+    <footer>
+      <div>Prepared for British English office and legal vocabulary practice.</div>
+    </footer>
+  </div>
 
   <script>
-   <script>
-  (function () {
-    // Fisher-Yates shuffle for an array
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    (function () {
+      // Fisher-Yates shuffle
+      function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
       }
-      return array;
-    }
 
-    // Randomise the order of .option elements inside each .options container
-    function randomiseOptionsOrder() {
-      const optionsContainers = document.querySelectorAll('.options');
-      optionsContainers.forEach(container => {
-        // Convert NodeList to array
-        const optionNodes = Array.from(container.querySelectorAll('.option'));
-        // Shuffle the array
-        const shuffled = shuffleArray(optionNodes.slice());
-        // Remove existing nodes from DOM and re-append in shuffled order
-        shuffled.forEach(node => container.appendChild(node));
-      });
-    }
+      // Randomise the order of options inside each .options container
+      function randomiseOptions() {
+        const containers = document.querySelectorAll('.options');
+        containers.forEach(container => {
+          const options = Array.from(container.querySelectorAll('.option'));
+          const shuffled = shuffleArray(options.slice());
+          // Append in shuffled order (moves existing nodes)
+          shuffled.forEach(opt => container.appendChild(opt));
+        });
+      }
 
-    // Attach click and keyboard handlers to options (idempotent)
-    function attachOptionHandlers() {
-      const optionElements = document.querySelectorAll('.option');
+      // Attach handlers to options (after randomisation)
+      function attachHandlers() {
+        const allOptions = document.querySelectorAll('.option');
+        allOptions.forEach(opt => {
+          // ensure focusable
+          if (!opt.hasAttribute('tabindex')) opt.setAttribute('tabindex', '0');
 
-      optionElements.forEach(opt => {
-        // Ensure each option is focusable for keyboard users
-        opt.setAttribute('tabindex', '0');
+          // Remove previous listeners by cloning if necessary
+          // (safe approach to avoid duplicate listeners on reload)
+          const clone = opt.cloneNode(true);
+          opt.parentNode.replaceChild(clone, opt);
+        });
 
-        // Remove any previously attached handlers to avoid duplicates
-        opt.replaceWith(opt.cloneNode(true));
-      });
-
-      // Re-query after cloning to get fresh elements without duplicate listeners
-      const freshOptions = document.querySelectorAll('.option');
-
-      freshOptions.forEach(opt => {
-        opt.addEventListener('click', function () {
-          const isCorrect = this.getAttribute('data-correct') === 'true';
-          const parent = this.parentElement;
-          const siblings = parent.querySelectorAll('.option');
-
-          // Reset siblings' classes and inline colours
-          siblings.forEach(sib => {
-            sib.classList.remove('correct', 'incorrect');
-            sib.style.color = '';
+        // Re-query fresh nodes
+        const freshOptions = document.querySelectorAll('.option');
+        freshOptions.forEach(opt => {
+          opt.addEventListener('click', handleSelection);
+          opt.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              opt.click();
+            }
           });
+        });
+      }
 
-          if (isCorrect) {
-            this.classList.add('correct');
-            this.style.color = getComputedStyle(document.documentElement).getPropertyValue('--green').trim() || '#0a7f2a';
-          } else {
-            this.classList.add('incorrect');
-            this.style.color = getComputedStyle(document.documentElement).getPropertyValue('--red').trim() || '#c92a2a';
-          }
+      // Handle selection: mark correct/incorrect and set colours
+      function handleSelection(e) {
+        const chosen = e.currentTarget;
+        const container = chosen.closest('.options');
+        if (!container) return;
+        const siblings = container.querySelectorAll('.option');
+
+        // Reset siblings
+        siblings.forEach(sib => {
+          sib.classList.remove('correct', 'incorrect');
+          sib.style.color = '';
         });
 
-        // Keyboard support (Enter / Space)
-        opt.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.click();
-          }
-        });
-      });
-    }
+        const isCorrect = chosen.getAttribute('data-correct') === 'true';
+        if (isCorrect) {
+          chosen.classList.add('correct');
+          chosen.style.color = getComputedStyle(document.documentElement).getPropertyValue('--green') || '#0a7f2a';
+        } else {
+          chosen.classList.add('incorrect');
+          chosen.style.color = getComputedStyle(document.documentElement).getPropertyValue('--red') || '#c92a2a';
+        }
+      }
 
-    // Initialise: randomise options, then attach handlers
-    function initQuiz() {
-      randomiseOptionsOrder();
-      attachOptionHandlers();
-    }
+      // Initialise quiz: randomise then attach handlers
+      function init() {
+        randomiseOptions();
+        attachHandlers();
+      }
 
-    // Run initialisation once DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initQuiz);
-    } else {
-      initQuiz();
-    }
-  })();
-</script>
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
   </script>
 </body>
 </html>
